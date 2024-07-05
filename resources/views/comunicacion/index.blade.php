@@ -3,7 +3,13 @@
 @section('content')
 <div class="container">
     <h1>Lista de Comunicados</h1>
+
+
+    @if(Auth::check() && Auth::user()->tipo == 'administrador')
     <a href="{{ route('comunicaciones.create') }}" class="btn btn-primary">Agregar Comunicado</a>
+    @endif
+    
+    
     <table class="table table-bordered mt-3">
         
         <thead>
@@ -23,13 +29,21 @@
                 <td>{{ $comunicacion->mensaje }}</td>
                 <td>{{ $comunicacion->fechaEnvio }}</td>
                 <td>
-                    <a href="{{ route('comunicaciones.show', $comunicacion->id) }}" class="btn btn-info">Ver</a>
+                    
+
+
+                <!-- Botones de Editar y Eliminar (Visible solo para administradores) -->
+                @if(Auth::user()->tipo == 'administrador')
                     <a href="{{ route('comunicaciones.edit', $comunicacion->id) }}" class="btn btn-warning">Editar</a>
                     <form action="{{ route('comunicaciones.destroy', $comunicacion->id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
+                @endif
+
+
+
                 </td>
             </tr>
             @endforeach

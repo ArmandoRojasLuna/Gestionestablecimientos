@@ -61,7 +61,17 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
+                        <div class="row mb-3">
+                            <label for ="tipo"  class = "col-md-4 col-form-label text-md-end">Ingrese tipo</label>
+                            <div class="col-md-6">
+                                <select id="tipo" name="tipo" class="form-select">
+                                    <option value="administrador">Administrador</option>
+                                    <option value="responsable">Responsables</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}

@@ -30,6 +30,8 @@ Route::middleware(['auth'])->group(function () {
     // Rutas para Comunicados
     Route::resource('comunicaciones', ComunicacionController::class);
 
+    
+
 });
 
 // Rutas de autenticación

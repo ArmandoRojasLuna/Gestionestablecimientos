@@ -12,12 +12,28 @@
             <div class="col-md-8">
                 <div class="list-group">
 
-                    <a href="{{ route('administradores.index') }}" class="list-group-item list-group-item-action">Administradores</a>
-                    <a href="{{ route('responsables.index') }}" class="list-group-item list-group-item-action">Responsables</a>
-                    <a href="{{ route('establecimientos.index') }}" class="list-group-item list-group-item-action">Establecimientos</a>
-                    <a href="{{ route('capacitaciones.index') }}" class="list-group-item list-group-item-action">Capacitaciones</a>
-                    <a href="{{ route('comunicaciones.index') }}" class="list-group-item list-group-item-action">Comunicados</a>
-                    
+
+                <ul class="navbar-nav me-auto">
+    @auth
+        @if(Auth::user()->tipo == "administrador")                        
+            <a href="{{ route('administradores.index') }}" class="list-group-item list-group-item-action">Administradores</a>
+            <a href="{{ route('responsables.index') }}" class="list-group-item list-group-item-action">Responsables</a>
+            <a href="{{ route('establecimientos.index') }}" class="list-group-item list-group-item-action">Establecimientos</a>
+            <a href="{{ route('capacitaciones.index') }}" class="list-group-item list-group-item-action">Capacitaciones</a>
+            <a href="{{ route('comunicaciones.index') }}" class="list-group-item list-group-item-action">Comunicados</a>
+        
+            @else
+            <a href="{{ route('capacitaciones.index') }}" class="list-group-item list-group-item-action">Capacitaciones</a>
+            <a href="{{ route('comunicaciones.index') }}" class="list-group-item list-group-item-action">Comunicados</a>
+
+            
+
+           
+        @endif
+    @endauth
+</ul>
+
+
 
                 </div>
             </div>

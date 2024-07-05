@@ -3,7 +3,13 @@
 @section('content')
 <div class="container">
     <h1>Lista de Capacitaciones</h1>
-    <a href="{{ route('capacitaciones.create') }}" class="btn btn-primary">Agregar Capacitacion</a>
+
+
+@if(Auth::check() && Auth::user()->tipo == 'administrador')
+    <a href="{{ route('capacitaciones.create') }}" class="btn btn-primary">Agregar Capacitaciones</a>
+    @endif
+
+
     <table class="table table-bordered mt-3">
         
         <thead>
@@ -23,13 +29,19 @@
                 <td>{{ $capacitacion->fecha }}</td>
                 <td>{{ $capacitacion->descripcion }}</td>
                 <td>
-                    <a href="{{ route('capacitaciones.show', $capacitacion->id) }}" class="btn btn-info">Ver</a>
+
+
+                <!-- Botones de Editar y Eliminar (Visible solo para administradores) -->
+                @if(Auth::user()->tipo == 'administrador')
                     <a href="{{ route('capacitaciones.edit', $capacitacion->id) }}" class="btn btn-warning">Editar</a>
                     <form action="{{ route('capacitaciones.destroy', $capacitacion->id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
+                @endif
+
+
                 </td>
             </tr>
             @endforeach
